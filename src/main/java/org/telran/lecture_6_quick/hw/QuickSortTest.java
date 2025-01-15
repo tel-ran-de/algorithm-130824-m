@@ -1,6 +1,6 @@
 package org.telran.lecture_6_quick.hw;
 
-import org.telran.lecture_6_quick.QuickSort;
+import org.telran.lecture_6_quick.algo.QuickSort;
 
 import java.util.Arrays;
 

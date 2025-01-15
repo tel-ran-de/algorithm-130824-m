@@ -1,4 +1,4 @@
-package org.telran.lecture_6_quick;
+package org.telran.lecture_6_quick.algo;
 
 import java.util.Arrays;
 
@@ -20,7 +20,7 @@ public class QuickSort {
 
     public static void quickSortRecursive(int[] array, int start, int end) {
         if (start >= end) { // условие выходы из рекурсии
-            System.out.println("start "+ start + " end " + end);
+//            System.out.println("start "+ start + " end " + end);
             return;
         }
         int indexPivot = partition(array, start, end);

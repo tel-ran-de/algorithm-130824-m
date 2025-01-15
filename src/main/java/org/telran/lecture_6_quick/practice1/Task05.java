@@ -1,5 +1,8 @@
 package org.telran.lecture_6_quick.practice1;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 // "Сумма наибольших по модулю"
 // Дан массив чисел.
 // Найти: сумму 5-ти самых больших элементов по модулю.
@@ -8,8 +11,10 @@ package org.telran.lecture_6_quick.practice1;
 
 public class Task05 {
     public static void main(String[] args) {
-        int[] numbers = {-25, 136, -13, -224, -128, -67, 128, -21, 4, 211, 0};
+        Integer[] numbers = {-25, 136, -13, -224, -128, -67, 128, -21, 4, 211, 0};
+        Arrays.sort(numbers, Comparator.comparing(Math::abs, Comparator.reverseOrder()));
 
+        System.out.println(Arrays.toString(numbers));
 
     }
 }

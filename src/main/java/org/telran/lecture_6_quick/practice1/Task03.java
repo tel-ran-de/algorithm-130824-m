@@ -7,7 +7,6 @@ import java.util.Scanner;
 // Найти: сумму элементов списка, больших данного числа a. Значение a можно задать самостоятельно.
 // Примечание: Используйте алгоритм сортировки, если нужно.
 
-
 public class Task03 {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);

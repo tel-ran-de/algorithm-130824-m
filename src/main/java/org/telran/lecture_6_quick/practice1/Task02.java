@@ -12,5 +12,7 @@ public class Task02 {
         Scanner input = new Scanner(System.in);
         int[] numbers = {2, 4, -8, -5, 0, 7, 12, 0, -4, 10};
 //        ...
+//        1. Сортируем массив
+//        2. Взять пять последних элементов и найти их сумму
     }
 }

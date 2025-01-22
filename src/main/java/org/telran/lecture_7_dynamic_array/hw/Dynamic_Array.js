@@ -9,7 +9,22 @@ class DynamicArray {
 
     // function add an element at the end of array
     add(data) {
-
+        if (count < size) {
+            this.array[this.count] = data;
+//            System.out.println("!!!");
+            this.count += 1;
+        }else {
+            // Есть места не хватает
+            let tmp = new Array(this.size * 2); // Создаем новый в 2 раза больше
+            // Копируем элементы из старого
+            for (let i = 0; i < size; i++) {
+                tmp[i] = this.array[i];
+            }
+            this.array = tmp;
+            this.size *= 2;
+            this.array[this.count] = data;
+            this.count++;
+        }
     }
 
     // function remove last element or put zero at last index
@@ -37,3 +52,4 @@ class DynamicArray {
 }
 
 let da = new DynamicArray();
+console.log(da.length());

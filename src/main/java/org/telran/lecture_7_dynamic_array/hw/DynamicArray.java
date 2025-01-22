@@ -10,10 +10,27 @@ public class DynamicArray {
         count = 0;
         size = 1;
     }
+//    [ ][ ][ ][ ][ ]
+//
 
     // function add an element at the end of array
     public void add(int data) {
-
+        if (count < size) {
+            array[count] = data;
+//            System.out.println("!!!");
+            count++;
+        }else {
+            // Есть места не хватает
+            int[] tmp = new int[size * 2]; // Создаем новый в 2 раза больше
+            // Копируем элементы из старого
+            for (int i = 0; i < size; i++) {
+                tmp[i] = array[i];
+            }
+            array = tmp;
+            size *= 2;
+            array[count] = data;
+            count++;
+        }
     }
 
     // function remove last element

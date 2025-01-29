@@ -2,12 +2,12 @@ package org.telran.lecture_8_st_and_qu.stack;
 
 public class ClassicStack {
 
-    private final int[] arr;
+    private final int[] data;
     private int top;
     private final int capacity;
 
     public ClassicStack(int size) {
-        arr = new int[size];
+        data = new int[size];
         capacity = size;
         top = -1;
     }
@@ -19,7 +19,7 @@ public class ClassicStack {
         } else {
             // insert element on top of stack
             System.out.println("Inserting " + x);
-            arr[++top] = x;
+            data[++top] = x;
         }
     }
 
@@ -31,7 +31,7 @@ public class ClassicStack {
             return -1;
         }
         // pop element from top of stack
-        return arr[top--];
+        return data[top--];
     }
 
     // return size of the stack
@@ -54,14 +54,14 @@ public class ClassicStack {
             System.out.println("Stack Underflow");
             return -1;
         } else {
-            return arr[top];
+            return data[top];
         }
     }
 
     // display elements of stack
     public void printStack() {
         for (int i = 0; i <= top; i++) {
-            System.out.print(arr[i] + " ");
+            System.out.print(data[i] + " ");
         }
     }
 }

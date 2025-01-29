@@ -12,8 +12,8 @@ class Stack {
 
     push(x) {
         if (this.top >= (this.capacity - 1)) {
-            console.error("Stack Overflow");
-            return false;
+            throw new Error("Stack Overflow");
+            // return false;
         } else {
             this.data[++this.top] = x;
             console.log(x + " pushed into stack");
@@ -47,11 +47,14 @@ class Stack {
 }
 
 // Driver code
-let stack = new Stack();
+let stack = new Stack(2);
 stack.push(10);
 stack.push(20);
 stack.push(30);
-stack.print();
+stack.push(40);
+stack.push(50);
+let last = stack.pop();
+console.log(last);
 // console.log(stack.pop() + " Popped from stack");
 // console.log("Top element is :" + stack.peek());
 // console.log("Elements present in stack :");

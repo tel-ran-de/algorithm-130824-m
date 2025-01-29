@@ -7,15 +7,15 @@ public class ClassicStack {
     private final int capacity;
 
     public ClassicStack(int size) {
-        data = new int[size];
-        capacity = size;
-        top = -1;
+        data = new int[size]; // хранилище элементов списка
+        capacity = size; // размер стека
+        top = -1; // индекс последнего(верхнего) элемента
     }
 
     // push elements to the top of stack
     public void push(int x) {
         if (isFull()) {
-            System.out.println("Stack OverFlow");
+            throw new ArrayIndexOutOfBoundsException("Array is empty");
         } else {
             // insert element on top of stack
             System.out.println("Inserting " + x);
@@ -33,6 +33,8 @@ public class ClassicStack {
         // pop element from top of stack
         return data[top--];
     }
+//    [1][2][3][4]
+//    top = 2
 
     // return size of the stack
     public int getSize() {
@@ -50,7 +52,7 @@ public class ClassicStack {
     }
 
     public int peek() {
-        if (top < 0) {
+        if (top == -1) {
             System.out.println("Stack Underflow");
             return -1;
         } else {

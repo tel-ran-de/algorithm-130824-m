@@ -1,29 +1,30 @@
 /** Динамическич массив в реализации класса */
 
 class DynamicArray {
+    #array;
     constructor() {
-        this.array = new Array(1); // Внутренний массив, для хранения элементов
+        this.#array = new Array(1); // Внутренний массив, для хранения элементов
         this.count = 0; // Количество занятых ячеек массива
         this.size = 1;  // Физический размер массива в памяти
     }
 
+    growSize(){
+        let tmp = new Array(this.size * 2); // Создаем новый в 2 раза больше
+        // Копируем элементы из старого
+        for (let i = 0; i < this.size; i++) {
+            tmp[i] = this.array[i];
+        }
+        this.array = tmp;
+        this.size *= 2;
+    }
+
     // function add an element at the end of array
     add(data) {
-        if (this.count < this.size) { // Есть места хватает
-            this.array[this.count] = data;
-            this.count += 1;
-        } else { // Есть места не хватает
-            let tmp = new Array(this.size * 2); // Создаем новый в 2 раза больше
-            // Копируем элементы из старого
-            for (let i = 0; i < this.size; i++) {
-                tmp[i] = this.array[i];
-            }
-            this.array = tmp;
-            this.size *= 2;
-
-            this.array[this.count] = data;
-            this.count++;
+        if (this.count >= this.size) { // Есть места не хватает
+            this.growSize();
         }
+        this.array[this.count] = data;
+        this.count++;
     }
 
     // function remove last element
@@ -43,16 +44,7 @@ class DynamicArray {
             this.array[index] = data;
             this.count++;
         } else { // Есть места не хватает
-            let tmp = new Array(this.size * 2); // Создаем новый в 2 раза больше
-            // Копируем элементы из старого
-            for (let i = 0; i < size; i++) {
-                tmp[i] = this.array[i];
-            }
-            this.array = tmp;
-            this.size *= 2;
-            for (let i = this.count - 1; i >= index; i--) {
-                this.array[i + 1] = this.array[i]; // сдвигаем все элементы вправо от текущего индекса
-            }
+            this.growSize();
             this.array[index] = data;
             this.count++;
         }
@@ -77,18 +69,14 @@ class DynamicArray {
     length() {
         return this.count;
     }
+
+    toString(){
+        return this.array;
+    }
 }
 
 // test DynamicArray
 let da = new DynamicArray();
 da.add(10);
-da.add(12);
-da.add(13);
-da.add(14);
-console.log(da.getArray());
-// da.remove();
-// console.log(da.getArray());
-da.removeAt(1);
-console.log(da.getArray());
-da.addAt(2, 20);
-console.log(da.getArray());
+
+console.log(da);

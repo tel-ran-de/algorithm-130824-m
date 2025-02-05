@@ -15,3 +15,15 @@
 // Input: 7
 // Output: No
 // Пояснение: Никакими комбинациями 5 и 3, 7 шариков купить невозможно
+let k=0;
+function canBuyBalloons(k) {
+    if (k!==1 && k!==2 && k!==4 && k!==7){
+       return true;
+    }
+    return false;
+  }
+
+  // Примеры
+  console.log(canBuyBalloons(8));  
+  console.log(canBuyBalloons(10)); 
+  console.log(canBuyBalloons(7));  

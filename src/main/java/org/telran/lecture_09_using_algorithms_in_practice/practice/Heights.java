@@ -16,5 +16,36 @@ package org.telran.lecture_09_using_algorithms_in_practice.practice;
 // Output: 5
 // Пояснение: будут видны все элементы, так как они расположены по возрастанию
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Heights {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите количество зданий: ");
+        int n = scanner.nextInt();
+        int[] buildings = new int[n];
+        System.out.println("Введите высоту зданий в этажах по мере удаления: ");
+        for (int i = 0; i < n; i++) {
+            int height;
+            do {
+                System.out.println("Enter height of building N:" + (i + 1) + " (Положительное число): ");
+                height = scanner.nextInt();
+            } while (height < 1);
+            buildings[i] = height;
+        }
+        System.out.println("Your district:" + Arrays.toString(buildings));
+
+        int visibleCount = 0;
+        int maxHeight = 0;
+        for (int building : buildings) {
+            if (building > maxHeight) {
+                visibleCount++;
+                maxHeight = building;
+            }
+        }
+        System.out.println("Количество видимых зданий: " + visibleCount);
+    }
 }
+

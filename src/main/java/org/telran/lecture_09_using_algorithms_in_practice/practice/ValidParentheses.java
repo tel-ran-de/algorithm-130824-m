@@ -26,4 +26,36 @@ package org.telran.lecture_09_using_algorithms_in_practice.practice;
 // Output: false
 
 public class ValidParentheses {
+
+   public static void main(String[] args) {
+        String trueOne = "()";
+        String trueTwo = "[()[]{}]";
+        String falseOne = "(]";
+        String falseTwo = "([(]))";
+
+        System.out.println(trueOne + " should be valid: " + isValidString(trueOne));
+        System.out.println(trueTwo + " should be valid: " + isValidString(trueTwo));
+        System.out.println(falseOne + " should be false: " + isValidString(falseOne));
+        System.out.println(falseTwo + " should be false: " + isValidString(falseTwo));
+    }
+
+    private static boolean isValidString(String s) {
+        char[] parentheses = s.toCharArray();
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < parentheses.length; i++) {
+            if (parentheses[i] == '(' || parentheses[i] == '{' || parentheses[i] == '[') {
+                stack.push(parentheses[i]);
+            } else if (parentheses[i] == ')' && !stack.isEmpty() && stack.peek().equals('(')) {
+                stack.pop();
+            } else if (parentheses[i] == ']' && !stack.isEmpty() && stack.peek().equals('[')) {
+                stack.pop();
+            } else if (parentheses[i] == '}' && !stack.isEmpty() && stack.peek().equals('{')) {
+                stack.pop();
+            } else {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
 }

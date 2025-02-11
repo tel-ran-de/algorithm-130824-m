@@ -17,4 +17,38 @@ package org.telran.lecture_09_using_algorithms_in_practice.practice;
 // Пояснение: будут видны все элементы, так как они расположены по возрастанию
 
 public class Heights {
+
+  public static void main(String[] args) {
+        int[] buildings = {8, 2, 3, 11, 11, 10};
+        int[] buildingsTwo = {12, 20, 39, 45, 89};
+        int[] buildingsThree = {8, 8, 8, 1, 8};
+        int[] buildingsFour = {8, 4, 6, 7, 5, 9};
+        int[] buildingsFive = {5, 3, 6, 8, 4, 7};
+
+        System.out.println("Visible floors for {8, 2, 3, 11, 11, 10}: " + countVisible(buildings));
+        System.out.println("Visible floors for {12, 20, 39, 45, 89}: " + countVisible(buildingsTwo));
+        System.out.println("Visible floors for {8, 8, 8, 1, 8}: " + countVisible(buildingsThree));
+        System.out.println("Visible floors for {8, 4, 6, 7, 5, 9}: " + countVisible(buildingsFour));
+        System.out.println("Visible floors for {5, 3, 6, 8, 4, 7} should be 3: " + countVisible(buildingsFive));
+    }
+
+    private static int countVisible(int[] buildings) {
+        if (buildings == null) {
+            return -1;
+        }
+
+        if (buildings.length == 0) {
+            return 0;
+        }
+
+        int count = 1;
+        int maxFloorBuilding = buildings[0];
+        for (int i = 1; i < buildings.length; i++) {
+            if (buildings[i] > maxFloorBuilding) {
+                count++;
+                maxFloorBuilding = buildings[i];
+            }
+        }
+        return count;
+    }
 }

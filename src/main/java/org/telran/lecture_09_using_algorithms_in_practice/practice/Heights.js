@@ -13,3 +13,18 @@
 // Input: [12, 20, 39, 45, 89]
 // Output: 5
 // Пояснение: будут видны все элементы, так как они расположены по возрастанию
+
+
+const howManyBuildings = (arr) => {
+  let start = 0;
+  let count = 0;
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] > start) {
+      start = arr[i];
+      count++;
+    }
+  }
+  return count;
+};
+
+const nums = [8, 2, 3, 11, 11, 10,12,23,22,56];

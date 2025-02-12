@@ -1,13 +1,17 @@
+// Напишите программу, используя жадный алгоритм.
+// Задача:
+// Монетная система некоторого государства состоит из монет достоинством: 1, 2, 5, 10
+// Требуется выдать сумму x, наименьшим возможным количеством монет.
+
 
 function getChange(sum, coins) {
     let result = [];
-    for (let i = coins.length - 1; i >= 0; i--) {
-        while (sum >= coins[i]) {
-            sum -= coins[i];
-            result.push(coins[i]);
-        }
-    }
-    for (let i = 0; i < result.length; i++) {
-        console.write(" " + result[i]);
-    }
+    // You code
+    return result
 }
+
+const coins = [1, 2, 5, 10];
+const sum = 100;
+
+let changeCoins = getChange(sum, coins);
+console.log(changeCoins);

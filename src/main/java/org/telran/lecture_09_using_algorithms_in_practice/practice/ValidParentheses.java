@@ -25,5 +25,35 @@ package org.telran.lecture_09_using_algorithms_in_practice.practice;
 // Input: s = "([(]))"
 // Output: false
 
+import java.util.Stack;
+
 public class ValidParentheses {
+    public static void main(String[] args) {
+        assert isValidString("()");
+        assert isValidString("[()[]{}]");
+        assert !isValidString("(]");
+        assert !isValidString("([(]))");
+        assert isValidString("{{(([]))}}");
+        assert !isValidString("{{(([)])}}");
+    }
+
+    private static boolean isValidString(String s) {
+//        char[] s = s.toCharArray();
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(' || s.charAt(i) == '{' || s.charAt(i) == '[') {
+                stack.push(s.charAt(i));
+            } else if (s.charAt(i) == ')' && !stack.isEmpty() && stack.peek().equals('(')) {
+                stack.pop();
+            } else if (s.charAt(i) == ']' && !stack.isEmpty() && stack.peek().equals('[')) {
+                stack.pop();
+            } else if (s.charAt(i) == '}' && !stack.isEmpty() && stack.peek().equals('{')) {
+                stack.pop();
+            } else {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
 }

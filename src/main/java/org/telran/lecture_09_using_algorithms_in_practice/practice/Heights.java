@@ -15,6 +15,18 @@ package org.telran.lecture_09_using_algorithms_in_practice.practice;
 // Input: [12, 20, 39, 45, 89]
 // Output: 5
 // Пояснение: будут видны все элементы, так как они расположены по возрастанию
+import java.util.Arrays;
 
 public class Heights {
+    public static void main(String[] args) {
+        assert howManyBuildings(new int[]{8, 2, 3, 11, 11, 10}) == 2;
+        assert howManyBuildings(new int[]{12, 20, 39, 45, 89}) == 5;
+        assert howManyBuildings(new int[]{40, 20, 21, 22, 23, 24, 25}) == 1;
+        assert howManyBuildings(new int[]{}) == 0;
+        assert howManyBuildings(new int[]{1, 2, 2, 2, 1, 2}) == 2;
+    }
+
+    public static int howManyBuildings(int[] buildings) {
+        return 0;
+    }
 }

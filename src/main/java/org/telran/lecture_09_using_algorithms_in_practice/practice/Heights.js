@@ -13,3 +13,13 @@
 // Input: [12, 20, 39, 45, 89]
 // Output: 5
 // Пояснение: будут видны все элементы, так как они расположены по возрастанию
+
+const howManyBuildings = (n) => {
+
+};
+
+console.assert(howManyBuildings([8, 2, 3, 11, 11, 10]) === 2, "тест-1");
+console.assert(howManyBuildings([12, 20, 39, 45, 89]) === 5, "тест-2");
+console.assert(howManyBuildings([40, 20, 21, 22, 23, 24, 25]) === 1, "тест-3");
+console.assert(howManyBuildings([]) === 0, "тест-4");
+console.assert(howManyBuildings([1, 2, 2, 2, 1, 2]) === 2, "тест-5");

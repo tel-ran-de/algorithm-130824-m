@@ -1,20 +1,34 @@
 package org.telran.lecture_11_greedy_practice.practice.backpack;
+import lombok.Getter;
+import java.util.Objects;
 
-// Есть набор предметов, у каждого предмета есть: цена и вес.
-// Требуется выбрать из заданного набора предметов наиболее ценные, которые поместятся в рюкзак заданной вместимости.
+@AllArgsConstructor
+@Getter
+public class Item {
+    public String name;
+    public int weight;
+    public int value;
+    public int unit_value; // Удельная ценность - цена за единицу веса
 
-// Алгоритм
-// 1. Рассчитываем удельную ценность для каждого предмета.
-// 2. Сортируем предметы по убыванию удельной ценности.
-// 3. Складываем предметы в рюкзак(массив), по суммарный вес не превысит максимально допустимый
-
-public class Backpack {
-    public static void main(String[] args) {
-        Item[] items = new Item[]{ // Исходный набор предметов
-                new Item(),
-                new Item(),
-        };
-        int totalWeight = 10; // Максимальная вместимость рюкзака
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return weight == item.weight && value == item.value && unit_value == item.unit_value && Objects.equals(name, item.name);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, weight, value, unit_value);
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", weight=" + weight +
+                ", value=" + value +
+                ", unit_value=" + unit_value +
+                '}' + "\n";
+    }
 }

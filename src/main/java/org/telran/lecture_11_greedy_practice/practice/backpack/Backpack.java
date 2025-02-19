@@ -20,6 +20,8 @@ public class Backpack {
                 new Item("Броня", 20, 1120),
                 new Item("Книга", 1, 10),
                 new Item("Часы", 2, 40),
+                new Item("Апельсины", 7, 80),
+                new Item("Сливы", 10, 100)
         };
         int totalWeight = 10; // Максимальная вместимость рюкзака
 

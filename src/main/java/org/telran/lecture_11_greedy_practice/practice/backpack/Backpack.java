@@ -23,7 +23,9 @@ public class Backpack {
         };
         int totalWeight = 10; // Максимальная вместимость рюкзака
 
-        Arrays.sort(items, Comparator.comparingDouble((Item a) -> a.getUnitValue()).reversed());
+        Arrays.sort(items, Comparator
+                .comparingDouble((Item a) -> a.getUnitValue()).reversed()
+                .thenComparing((Item::getWeight)));
         print(items);
 
         List<Item> backpack = new ArrayList<>();

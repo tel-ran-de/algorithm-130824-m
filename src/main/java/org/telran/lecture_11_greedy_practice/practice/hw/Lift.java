@@ -14,7 +14,6 @@ package org.telran.lecture_11_greedy_practice.practice.hw;
 //  На вход: 1 (вызываем на первый этаж)
 //  результат: отправляем лифт С
 
-
 import java.util.NoSuchElementException;
 
 public class Lift {

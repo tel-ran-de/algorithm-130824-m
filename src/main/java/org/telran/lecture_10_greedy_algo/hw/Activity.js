@@ -10,8 +10,38 @@
 //  Активности считаются непересекающимися, если время окончания одной активности меньше или равно времени начала другой активности.
 //  Необходимо использовать жадный алгоритм.
 
-
+// function getMaxCostActivities(activities){
+//     ...
+// }
+// 1. стоимость в час
+// 2. Сортировка по смешанным критериям
 activities = [
-    {name: '...', start: 1, end: 2, cost: 3},
-    // ...
+    {name: 'drawing', start: 10, end: 13, cost: 60}, // 9
+    {name: 'writing', start: 10, end: 17, cost: 40}, // 7
+    {name: 'eating', start: 12, end: 14, cost: 40},  // 20
+    {name: 'coding', start: 15, end: 19, cost: 40},  // 10
+    {name: 'reading', start: 13, end: 16, cost: 100}, // avr = 33
+    {name: 'dancing', start: 17, end: 18, cost: 20}, // 20
 ]
+
+activities.sort((a, b) => b.cost - a.cost || a.end - b.end);
+// 1. Сортировали по end
+// 2. Перебираем и выбираем непересекающиеся активности ...
+console.log(activities);
+
+
+
+// false || ??? -> ???
+// true || ??? -> ???
+
+// true && false --> false
+// true && true --> true
+// false && ??? --> false
+
+// 0 -false
+// 1- true
+let res1 = 2 || 10; // 2
+let res2 = 0 || 10; // 10
+
+let res3 = 2 && 10; // 10
+let res4 = 0 && 10; // 0

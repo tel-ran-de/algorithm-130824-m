@@ -12,3 +12,41 @@
 //  На вход: 1 (вызываем на первый этаж)
 //  результат: отправляем лифт С
 
+
+class Elevator {
+    constructor(name, floor, speed) {
+      this.name = name; 
+      this.floor = floor; 
+      this.speed = speed; // 
+    }
+  
+    getTime(target) {
+      return Math.abs(this.floor - target) * this.speed;
+    }
+  }
+  
+   function choiceElevator(target, elevators) {
+    let minTime = Infinity; // заглушка
+    let bestElevator = null;
+  
+    elevators.forEach(elevator => {
+      const time = elevator.getTime(target);
+      if (time < minTime) {
+        minTime = time;
+        bestElevator = elevator;
+      }
+    });
+  
+    return bestElevator.name;
+}
+  
+const elevatorA = new Elevator('Лифт А', 6, 3); 
+const elevatorB = new Elevator('Лифт В', 8, 2); 
+const elevatorC = new Elevator('Лифт С', 11, 2); 
+  
+const elevators = [elevatorA, elevatorB, elevatorC];
+  
+const floor = 2;
+const bestOption = choiceElevator(floor, elevators);
+  
+console.log(`Оптимальный вариант - ${bestOption}`); 

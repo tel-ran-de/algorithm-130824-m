@@ -51,8 +51,13 @@ class BST {
      * @param node    Текущий узел.
      * @param newNode Новый узел.
      */
-    private void insertNode(Node node, Node newNode) {
+     private void insertNode(Node node, Node newNode) {
         // TODO-1: Доработайте код, чтобы все ключи были уникальные.
+
+        if (newNode.key == node.key) {
+            node.value = newNode.value;
+            return;
+        }
         if (newNode.key < node.key) {
             if (node.left == null) {
                 node.left = newNode;

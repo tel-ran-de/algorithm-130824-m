@@ -1,5 +1,7 @@
 package org.telran.lecture_12_trees.practice;
 
+import java.util.NoSuchElementException;
+
 class Node {
     int key;
     String value;
@@ -91,7 +93,16 @@ class BST {
 
         // Если узел найден, возвращаем его значение(value)
         // Если не найден, продолжаем поиск в левой или правой части
-        return node;
+        if (node == null) {
+            throw new NoSuchElementException();
+        }
+        if (node.key == key) {
+            return node;
+        } else if (key > node.key){
+            return searchNode(node.right, key);
+        } else {
+            return searchNode(node.left, key);
+        }
     }
 
     /**
@@ -153,6 +164,18 @@ class BST {
     }
 
     public static void main(String[] args) {
+        BST bst = new BST();
 
+        bst.insert(3, "Roman");
+        bst.insert(1, "Ivan");
+        bst.insert(5, "John");
+        bst.insert(2, "Sam");
+        bst.insert(22, "One");
+        bst.insert(11, "Two");
+        bst.insert(23, "Three");
+        bst.insert(12, "Four");
+        bst.insert(10, "Five");
+
+        System.out.println(bst.searchNode(bst.root, 11).value);
     }
 }

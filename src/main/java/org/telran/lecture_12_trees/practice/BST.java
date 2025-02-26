@@ -53,6 +53,10 @@ class BST {
      */
     private void insertNode(Node node, Node newNode) {
         // TODO-1: Доработайте код, чтобы все ключи были уникальные.
+        if (newNode.key == node.key) {
+            node.value = newNode.value;
+            return;
+        }
         if (newNode.key < node.key) {
             if (node.left == null) {
                 node.left = newNode;
@@ -153,6 +157,18 @@ class BST {
     }
 
     public static void main(String[] args) {
+        BST bst = new BST();
+        bst.insert(3, "Roman");
+        bst.insert(1, "Ivan");
+        bst.insert(5, "John");
+        bst.insert(2, "Sam");
+        bst.insert(22, "One");
+        bst.insert(11, "Two");
+        bst.insert(23, "Three");
+        bst.insert(12, "Four");
+        bst.insert(10, "Five");
+        bst.insert(23, "Six");
 
+        bst.displayTree();
     }
 }

@@ -86,13 +86,29 @@ class BST {
      * @param key  Ключ искомого узла.
      * @return Найденный узел или null, если узел не найден.
      */
-    private Node searchNode(Node node, int key) {
-        // TODO-3: напишите реализацию метода
 
+--------------------------------------------------------------
+    
+       private Node searchNode(Node node, int key) {
+        // TODO-3: напишите реализацию метода
+if (node == null) {
+    return null;
+}
+if (node.key == key) {
+    return node;
+}
+if (key < node.key) {
+    return searchNode(node.left, key);
+}else if (key > node.key) {
+    return searchNode(node.right, key);
+}
         // Если узел найден, возвращаем его значение(value)
         // Если не найден, продолжаем поиск в левой или правой части
         return node;
     }
+
+-------------------------------------------------------------
+    
 
     /**
      * Находит минимальный узел в дереве.

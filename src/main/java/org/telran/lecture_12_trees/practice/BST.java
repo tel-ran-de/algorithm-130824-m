@@ -22,6 +22,7 @@ class Node {
 
 class BST {
     Node root;
+    int size = 0;
 
     /**
      * Конструктор для создания нового бинарного дерева поиска.
@@ -40,6 +41,7 @@ class BST {
         Node newNode = new Node(key, value);
         if (root == null) {
             root = newNode;
+            size++;
         } else {
             insertNode(root, newNode);
         }
@@ -56,12 +58,14 @@ class BST {
         if (newNode.key < node.key) {
             if (node.left == null) {
                 node.left = newNode;
+                size++;
             } else {
                 insertNode(node.left, newNode);
             }
         } else if (newNode.key > node.key) {
             if (node.right == null) {
                 node.right = newNode;
+                size++;
             } else {
                 insertNode(node.right, newNode);
             }
@@ -118,7 +122,8 @@ class BST {
 
     public int length() {
         // TODO-2: реализуйте метод, возвращающий количество узлов в дереве
-        return 0;
+
+        return size;
     }
 
     /**
@@ -165,5 +170,6 @@ class BST {
         tree.insert(1, "ElenaNewNew");
 
         tree.displayTree();
+        System.out.println(tree.length());
     }
 }

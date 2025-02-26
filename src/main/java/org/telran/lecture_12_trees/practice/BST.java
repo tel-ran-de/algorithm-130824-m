@@ -59,12 +59,14 @@ class BST {
             } else {
                 insertNode(node.left, newNode);
             }
-        } else {
+        } else if (newNode.key > node.key) {
             if (node.right == null) {
                 node.right = newNode;
             } else {
                 insertNode(node.right, newNode);
             }
+        } else {
+            node.value = newNode.value;
         }
     }
 
@@ -153,6 +155,15 @@ class BST {
     }
 
     public static void main(String[] args) {
+        BST tree = new BST();
+        tree.insert(2, "Irina");
+        tree.insert(5, "Anna");
+        tree.insert(1, "Elena");
+        tree.insert(8, "Olga");
+        tree.insert(6, "Hanna");
+        tree.insert(1, "ElenaNew");
+        tree.insert(1, "ElenaNewNew");
 
+        tree.displayTree();
     }
 }

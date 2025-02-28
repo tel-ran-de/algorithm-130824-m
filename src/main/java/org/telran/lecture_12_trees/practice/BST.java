@@ -22,6 +22,7 @@ class Node {
 
 class BST {
     Node root;
+    private int length = 0;
 
     /**
      * Конструктор для создания нового бинарного дерева поиска.
@@ -37,6 +38,7 @@ class BST {
      * @param value Значение нового узла.
      */
     public void insert(int key, String value) {
+
         Node newNode = new Node(key, value);
         if (root == null) {
             root = newNode;
@@ -52,19 +54,23 @@ class BST {
      * @param newNode Новый узел.
      */
     private void insertNode(Node node, Node newNode) {
-        // TODO-1: Доработайте код, чтобы все ключи были уникальные.
+        // TODO-1[complete]: Доработайте код, чтобы все ключи были уникальные.
         if (newNode.key < node.key) {
             if (node.left == null) {
                 node.left = newNode;
+                length++;
             } else {
                 insertNode(node.left, newNode);
             }
-        } else {
+        } else if (newNode.key > node.key) {
             if (node.right == null) {
                 node.right = newNode;
+                length++;
             } else {
-                insertNode(node.right, newNode);
+                this.insertNode(node.right, newNode);
             }
+        } else { // Найдена дублирующая Нода
+            node.value = newNode.value;
         }
     }
 
@@ -87,11 +93,19 @@ class BST {
      * @return Найденный узел или null, если узел не найден.
      */
     private Node searchNode(Node node, int key) {
-        // TODO-3: напишите реализацию метода
+        // TODO-3[complete]: напишите реализацию метода
 
-        // Если узел найден, возвращаем его значение(value)
-        // Если не найден, продолжаем поиск в левой или правой части
-        return node;
+        if (node == null) {
+            return null;
+        }
+
+        if (key < node.key) {
+            return this.searchNode(node.left, key);
+        } else if (key > node.key) {
+            return this.searchNode(node.right, key);
+        } else {
+            return node;
+        }
     }
 
     /**
@@ -115,8 +129,8 @@ class BST {
     }
 
     public int length() {
-        // TODO-2: реализуйте метод, возвращающий количество узлов в дереве
-        return 0;
+        // TODO-2[complete]: реализуйте метод, возвращающий количество узлов в дереве
+        return length;
     }
 
     /**
@@ -153,6 +167,13 @@ class BST {
     }
 
     public static void main(String[] args) {
+        BST bst = new BST();
+        bst.insert(3, "Ivan");
 
+        bst.displayTree();
     }
 }
+
+// 1. Ничего не делать
+// 2. Обновим значение на новое, но не создадим новый узел
+// 3. Выбросить исключение

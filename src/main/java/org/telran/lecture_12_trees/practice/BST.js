@@ -37,6 +37,7 @@ class BinarySearchTree {
         // newNode = {"key": 2, "value": "Вася", "left": null, "right": null};
         if (this.root === null) {
             this.root = newNode;
+            this.num_nodes++;
         } else {
             this.insertNode(this.root, newNode);
         }
@@ -106,6 +107,12 @@ class BinarySearchTree {
      */
     min() {
         // TODO-4: напишите реализацию метода
+        if (this.root === null) return null;
+        let current = this.root;
+        while (current.left !== null) {
+            current = current.left;
+        }
+        return current;
     }
 
     /**
@@ -114,6 +121,12 @@ class BinarySearchTree {
      */
     max() {
         // TODO-5: напишите реализацию метода
+        if (this.root === null) return null;
+        let current = this.root;
+        while (current.right !== null) {
+            current = current.right;
+        }
+        return current;
     }
 
     length() {

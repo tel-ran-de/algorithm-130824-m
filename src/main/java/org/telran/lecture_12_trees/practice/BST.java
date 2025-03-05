@@ -18,6 +18,16 @@ class Node {
         this.left = null;
         this.right = null;
     }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "key=" + key +
+                ", value='" + value + '\'' +
+                ", left=" + left +
+                ", right=" + right +
+                '}';
+    }
 }
 
 class BST {
@@ -115,7 +125,11 @@ class BST {
      */
     public Node min() {
         // TODO-4: напишите реализацию метода
-        return new Node(0, "zero"); // Заглушка
+        Node currentNode = root;
+        while (currentNode.left != null) {
+            currentNode = currentNode.left;
+        }
+        return currentNode;
     }
 
     /**
@@ -125,7 +139,11 @@ class BST {
      */
     public Node max() {
         // TODO-5: напишите реализацию метода
-        return new Node(0, "zero"); // Заглушка
+        Node currentNode = root;
+        while (currentNode.right != null) {
+            currentNode = currentNode.right;
+        }
+        return currentNode;
     }
 
     public int length() {
@@ -169,8 +187,16 @@ class BST {
     public static void main(String[] args) {
         BST bst = new BST();
         bst.insert(3, "Ivan");
+        bst.insert(3, "Ivan");
+        bst.insert(2, "John");
+        bst.insert(33, "Adam");
+        bst.insert(4, "Sara");
 
         bst.displayTree();
+
+        System.out.println(bst.min());
+        System.out.println(bst.max());
+        System.out.println(bst.searchNode(bst.root, 2).value);
     }
 }
 

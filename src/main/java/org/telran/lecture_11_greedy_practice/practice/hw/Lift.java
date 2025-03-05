@@ -14,7 +14,69 @@ package org.telran.lecture_11_greedy_practice.practice.hw;
 //  На вход: 1 (вызываем на первый этаж)
 //  результат: отправляем лифт С
 
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Lift {
+
+    private final int currentFloor;
+    private final int speed;
+
+    public Lift(int currentFloor, int speed) {
+        this.currentFloor = currentFloor;
+        this.speed = speed;
+    }
+
+    public int getCurrentFloor() {
+        return currentFloor;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int calculateTimeToFloor(int targetFloor) {
+        return Math.abs(targetFloor - currentFloor) * speed;
+    }
+}
+
+class ElevatorSystem {
+    private final List<Lift> lifts;
+
+    public ElevatorSystem(List<Lift> lifts) {
+        this.lifts = lifts;
+    }
+
+    public Lift findFastestLift(int targetFloor) {
+        Lift fastestLift = null;
+        int minTime = Integer.MAX_VALUE;
+
+        for (Lift lift : lifts) {
+            int time = lift.calculateTimeToFloor(targetFloor);
+            if (time < minTime) {
+                minTime = time;
+                fastestLift = lift;
+            }
+        }
+
+        if (fastestLift == null) {
+            throw new RuntimeException("Нет доступных лифтов");
+        }
+
+        return fastestLift;
+    }
+
+    public static void main(String[] args) {
+        List<Lift> lifts = new ArrayList<>();
+        lifts.add(new Lift(3, 3));
+        lifts.add(new Lift(6, 2));
+        lifts.add(new Lift(2, 2));
+
+        ElevatorSystem elevatorSystem = new ElevatorSystem(lifts);
+        int targetFloor = 10;
+        Lift fastestLift = elevatorSystem.findFastestLift(targetFloor);
+
+        System.out.println("Lift start from " + fastestLift.getCurrentFloor() +
+                ", time: " + fastestLift.calculateTimeToFloor(targetFloor) + " sec");
+    }
 }

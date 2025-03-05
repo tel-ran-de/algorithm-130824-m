@@ -12,3 +12,27 @@
 //  На вход: 1 (вызываем на первый этаж)
 //  результат: отправляем лифт С
 
+const elevators = [
+   { name: "lift_A", floor: 4, speed: 3 },
+   { name: "lift_B", floor: 8, speed: 2 },
+   { name: "lift_C", floor: 5, speed: 2},
+]
+const needFloor = 1;
+
+function findFastElevator(elevators, needFloor) {
+let fastElevator = null;
+let minTime = Infinity;
+
+   elevators.forEach(elevators => {
+      const { name, floor, speed } = elevators;
+      const time = (floor - needFloor) * speed;
+
+      if (time < minTime) {
+         minTime = time;
+         fastElevator = name;
+      }
+   });
+   return `${fastElevator}`;
+}
+
+console.log(findFastElevator(elevators, needFloor));

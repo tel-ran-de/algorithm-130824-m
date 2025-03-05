@@ -28,12 +28,14 @@ public class AVLTree {
 
     Node root;
     private int length = 0;
+    private boolean isBalanced;
 
     /**
      * Конструктор для создания нового бинарного дерева поиска.
      */
     public AVLTree() {
         this.root = null;
+        this.isBalanced = true;
     }
 
     /**
@@ -163,9 +165,16 @@ public class AVLTree {
             return;
         }
         node.balanceFactor = this.getHeight(node.right) - this.getHeight(node.left);
+        if (node.balanceFactor > 1 || node.balanceFactor < -1) {
+            this.isBalanced = false;
+        }
         // console.log("key:", node.key, "bf:", node.balanceFactor);
         this.updateBalanceFactor(node.right);
         this.updateBalanceFactor(node.left);
+    }
+
+    public boolean isBalanced() {
+        return this.isBalanced;
     }
 
     /**

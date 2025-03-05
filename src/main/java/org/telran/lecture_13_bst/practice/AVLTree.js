@@ -12,6 +12,7 @@ class Node {
         this.value = value;
         this.left = null;
         this.right = null;
+        this.balanceFactor = 0;
         // TODO: добавить отслеживание баланса this.balanceFactor = 0;
         //  Реализовать обновление при вставке
     }
@@ -39,6 +40,7 @@ class AVLTree {
         // newNode = {"key": 2, "value": "Вася", "left": null, "right": null};
         if (this.root === null) {
             this.root = newNode;
+            this.updateBalanceFactor(this.root);
         } else {
             this.insertNode(this.root, newNode);
         }
@@ -55,6 +57,7 @@ class AVLTree {
             if (node.left === null) {
                 node.left = newNode;
                 this.num_nodes++;
+                this.updateBalanceFactor(this.root);
             } else {
                 this.insertNode(node.left, newNode);
             }
@@ -62,6 +65,7 @@ class AVLTree {
             if (node.right === null) {
                 node.right = newNode;
                 this.num_nodes++;
+                this.updateBalanceFactor(this.root);
             } else {
                 this.insertNode(node.right, newNode);
             }
@@ -115,12 +119,38 @@ class AVLTree {
      * @returns Максимальный узел или null, если дерево пустое.
      */
     max() {
-        // TODO-5: напишите реализацию метода
+        // TODO-5[complete]: напишите реализацию метода
+        if (this.root === null) {
+            return null;
+        }
+        let currentNode = this.root;
+        while (currentNode.right != null) {
+            currentNode = currentNode.right;
+        }
+        return currentNode;
     }
 
     length() {
         // TODO-2[complete]: реализуйте метод, возвращающий количество узлов в дереве
         return this.num_nodes;
+    }
+
+    getHeight(node) {
+        if (node === null) {
+            return 0;
+        }
+        return Math.max(this.getHeight(node.left), this.getHeight(node.right)) + 1;
+
+    }
+
+    updateBalanceFactor(node) {
+        if (node === null) {
+            return;
+        }
+        node.balanceFactor = this.getHeight(node.right) - this.getHeight(node.left);
+        // console.log("key:", node.key, "bf:", node.balanceFactor);
+        this.updateBalanceFactor(node.right);
+        this.updateBalanceFactor(node.left);
     }
 
     /**
@@ -144,7 +174,7 @@ class AVLTree {
     displayNode(node, prefix, isLeft) {
         if (node !== null) {
             const displayPrefix = prefix + (isLeft ? '├── L:' : '└── R:');
-            console.log(displayPrefix + node.key + ':' + node.value);
+            console.log(displayPrefix + node.key + ': bf ' + node.balanceFactor);
             // console.log(displayPrefix + node.key);
 
             const childPrefix = prefix + (isLeft ? '│   ' : '    ');
@@ -159,6 +189,17 @@ class AVLTree {
 // Пример использования
 const tree = new AVLTree();
 tree.insert(3, "1");
+tree.insert(12, "1");
+tree.insert(2, "1");
+tree.insert(15, "1");
+tree.insert(16, "1");
 
 tree.displayTree();
+// let maxNode = tree.max();
+// if (maxNode === null) {
+//     console.log("Дерево пустое")
+// }else {
+//     console.log(maxNode.key,":", maxNode.value);
+// }
+
 

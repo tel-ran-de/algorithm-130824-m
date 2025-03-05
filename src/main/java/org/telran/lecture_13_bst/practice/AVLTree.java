@@ -5,6 +5,7 @@ class Node {
     String value;
     Node left;
     Node right;
+    int balanceFactor;
 
     /**
      * Конструктор для создания нового узла.
@@ -17,6 +18,7 @@ class Node {
         this.value = value;
         this.left = null;
         this.right = null;
+        this.balanceFactor = 0;
         // TODO: добавить отслеживание баланса this.balanceFactor = 0;
         //  Реализовать обновление при вставке
     }
@@ -45,6 +47,8 @@ public class AVLTree {
         Node newNode = new Node(key, value);
         if (root == null) {
             root = newNode;
+            length++;
+            this.updateBalanceFactor(root);
         } else {
             insertNode(root, newNode);
         }
@@ -62,6 +66,7 @@ public class AVLTree {
             if (node.left == null) {
                 node.left = newNode;
                 length++;
+                this.updateBalanceFactor(root);
             } else {
                 insertNode(node.left, newNode);
             }
@@ -69,6 +74,7 @@ public class AVLTree {
             if (node.right == null) {
                 node.right = newNode;
                 length++;
+                this.updateBalanceFactor(root);
             } else {
                 this.insertNode(node.right, newNode);
             }
@@ -117,8 +123,15 @@ public class AVLTree {
      * @return Минимальный узел или null, если дерево пустое.
      */
     public Node min() {
-        // TODO-4: напишите реализацию метода
-        return new Node(0, "zero"); // Заглушка
+        // TODO-4[complete]: напишите реализацию метода
+        if (root == null) {
+            return null;
+        }
+        Node currentNode = root;
+        while (currentNode.left != null) {
+            currentNode = currentNode.left;
+        }
+        return currentNode;
     }
 
     /**
@@ -134,6 +147,25 @@ public class AVLTree {
     public int length() {
         // TODO-2[complete]: реализуйте метод, возвращающий количество узлов в дереве
         return length;
+    }
+
+
+    private int getHeight(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return Math.max(this.getHeight(node.left), this.getHeight(node.right)) + 1;
+
+    }
+
+    private void updateBalanceFactor(Node node) {
+        if (node == null) {
+            return;
+        }
+        node.balanceFactor = this.getHeight(node.right) - this.getHeight(node.left);
+        // console.log("key:", node.key, "bf:", node.balanceFactor);
+        this.updateBalanceFactor(node.right);
+        this.updateBalanceFactor(node.left);
     }
 
     /**
@@ -159,7 +191,7 @@ public class AVLTree {
             String displayPrefix = prefix + (isLeft ? "├── " : "└── ");
             String directionIndicator = isLeft ? "L: " : "R: ";
 
-            System.out.println(displayPrefix + directionIndicator + node.key + ":" + node.value);
+            System.out.println(displayPrefix + directionIndicator + node.key + ":" + node.balanceFactor);
 
             String childPrefix = prefix + (isLeft ? "│   " : "    ");
             if (node.left != null || node.right != null) {
@@ -171,8 +203,18 @@ public class AVLTree {
 
     public static void main(String[] args) {
         AVLTree tree = new AVLTree();
-        tree.insert(3, "Ivan");
+        tree.insert(3, "1");
+        tree.insert(12, "1");
+        tree.insert(2, "1");
+        tree.insert(15, "1");
+        tree.insert(16, "1");
 
         tree.displayTree();
+//        Node minNode = tree.min();
+//        if (minNode == null) {
+//            System.out.println("Дерево пустое");
+//        }else {
+//            System.out.println(minNode.key + ":" + minNode.value );
     }
+
 }

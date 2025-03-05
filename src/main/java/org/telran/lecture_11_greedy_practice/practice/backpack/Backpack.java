@@ -10,11 +10,29 @@ package org.telran.lecture_11_greedy_practice.practice.backpack;
 
 public class Backpack {
     public static void main(String[] args) {
-        Item[] items = new Item[]{ // Исходный набор предметов
-                new Item(),
-                new Item(),
+        // Исходный набор предметов
+        Item[] items = {
+                new Item("Green", 6, 60),
+                new Item("Yellow", 5, 100),
+                new Item("Red", 8, 120),
+                new Item("Blue", 4, 70),
+                new Item("Black", 3, 30)
         };
-        int totalWeight = 10; // Максимальная вместимость рюкзака
+        int maxWeight = 10; // Максимальная вместимость рюкзака
+        Arrays.sort(items, Comparator.comparingInt(i->-i.unit_value));
+        int currentWeight = 0;
+        int totalValue = 0;
+        System.out.println("Selected items:");
+
+        for (Item item : items ) {
+            if(currentWeight + item.weight <= maxWeight) {
+                currentWeight += item.weight;
+                totalValue += item.value;
+                System.out.println(item);
+            }
+        }
+        System.out.println("Backpacks total value " + totalValue + " Backpacks current weight " + currentWeight);
     }
 
 }
+

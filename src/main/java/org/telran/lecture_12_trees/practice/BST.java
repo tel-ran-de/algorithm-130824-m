@@ -22,7 +22,6 @@ class Node {
 
 class BST {
     Node root;
-    private int length = 0;
 
     /**
      * Конструктор для создания нового бинарного дерева поиска.
@@ -38,7 +37,6 @@ class BST {
      * @param value Значение нового узла.
      */
     public void insert(int key, String value) {
-
         Node newNode = new Node(key, value);
         if (root == null) {
             root = newNode;
@@ -54,23 +52,23 @@ class BST {
      * @param newNode Новый узел.
      */
     private void insertNode(Node node, Node newNode) {
-        // TODO-1[complete]: Доработайте код, чтобы все ключи были уникальные.
+        // TODO-1: Доработайте код, чтобы все ключи были уникальные.
+        if (newNode.key == node.key) {
+            node.value = newNode.value;
+            return;
+        }
         if (newNode.key < node.key) {
             if (node.left == null) {
                 node.left = newNode;
-                length++;
             } else {
                 insertNode(node.left, newNode);
             }
-        } else if (newNode.key > node.key) {
+        } else {
             if (node.right == null) {
                 node.right = newNode;
-                length++;
             } else {
-                this.insertNode(node.right, newNode);
+                insertNode(node.right, newNode);
             }
-        } else { // Найдена дублирующая Нода
-            node.value = newNode.value;
         }
     }
 
@@ -93,19 +91,21 @@ class BST {
      * @return Найденный узел или null, если узел не найден.
      */
     private Node searchNode(Node node, int key) {
-        // TODO-3[complete]: напишите реализацию метода
-
+        // TODO-3: напишите реализацию метода
         if (node == null) {
             return null;
         }
-
-        if (key < node.key) {
-            return this.searchNode(node.left, key);
-        } else if (key > node.key) {
-            return this.searchNode(node.right, key);
-        } else {
+        if (node.key == key) {
             return node;
+        } else if (key < node.key) {
+            return searchNode(node.left, key);
+        } else {
+            return searchNode(node.right, key);
         }
+
+        // Если узел найден, возвращаем его значение(value)
+        // Если не найден, продолжаем поиск в левой или правой части
+
     }
 
     /**
@@ -115,7 +115,14 @@ class BST {
      */
     public Node min() {
         // TODO-4: напишите реализацию метода
-        return new Node(0, "zero"); // Заглушка
+        if (root == null) {
+            return null;
+        }
+        Node current = root;
+        while (current.left != null) {
+            current = current.left;
+        }
+        return current;
     }
 
     /**
@@ -125,12 +132,37 @@ class BST {
      */
     public Node max() {
         // TODO-5: напишите реализацию метода
-        return new Node(0, "zero"); // Заглушка
+        if (root == null) {
+            return null;
+        }
+        Node current = root;
+        while (current.right != null) {
+            current = current.right;
+        }
+        return current; // Заглушка
     }
 
     public int length() {
-        // TODO-2[complete]: реализуйте метод, возвращающий количество узлов в дереве
-        return length;
+        // TODO-2: реализуйте метод, возвращающий количество узлов в дереве
+        return length(root);
+    }
+
+    private int length(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + length(node.left) + length(node.right);
+    }
+
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return 1 + Math.max(height(node.left), height(node.right)); // Берём макс. глубину левого и правого поддерева
     }
 
     /**
@@ -167,13 +199,37 @@ class BST {
     }
 
     public static void main(String[] args) {
+
         BST bst = new BST();
-        bst.insert(3, "Ivan");
+
+        bst.insert(6, "раз");
+        bst.insert(3, "два");
+        bst.insert(8, "три");
+        bst.insert(2, "four");
+        bst.insert(9, "пять");
+        bst.insert(4, "six");
+        bst.insert(45, "seven");
+        bst.insert(63, "eight");
+        bst.insert(6, "nine");
+        bst.insert(-10, "ten");
+        bst.insert(-4, "eleven");
+        bst.insert(23, "twelve");
+        bst.insert(19, "thirteen");
 
         bst.displayTree();
+
+        System.out.println("Search of 7: " + (bst.search(7) != null ? bst.search(7) : "Not Found"));
+        System.out.println("Search of 100: " + (bst.search(100) != null ? bst.search(100) : "Not Found"));
+        System.out.println("Search of 45: " + (bst.search(45) != null ? bst.search(45) : "Not Found"));
+
+        System.out.println("---------------");
+
+        System.out.println("Минимальный узел: " + bst.min().key + " (" + bst.min().value + ")");
+        System.out.println("---------------");
+        System.out.println("Максимальный узел: " + bst.max().key + " (" + bst.max().value + ")");
+        System.out.println("---------------");
+        System.out.println("Количество узлов в дереве составляет: " + bst.length());
+        System.out.println("---------------");
+        System.out.println("Глубина или высота дерева: " + bst.height());
     }
 }
-
-// 1. Ничего не делать
-// 2. Обновим значение на новое, но не создадим новый узел
-// 3. Выбросить исключение

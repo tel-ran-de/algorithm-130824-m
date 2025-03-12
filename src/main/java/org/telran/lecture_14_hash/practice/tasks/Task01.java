@@ -3,13 +3,16 @@ package org.telran.lecture_14_hash.practice.tasks;
 import java.util.Map;
 import java.util.HashMap;
 
-// Задача: Дан массив элементов.
-// Нужно подсчитать, сколько раз встречается каждый элемент.
-
 public class Task01 {
     public static Map<Integer, Integer> countElementFrequency(Integer[] arr) {
         Map<Integer, Integer> frequencyMap = new HashMap<>(); // Создаем HashMap для хранения частот
-        // You code here ...
+      for (Integer element : arr) {
+          if(frequencyMap.containsKey(element)) {
+              frequencyMap.put(element, frequencyMap.get(element) + 1);
+          } else {
+              frequencyMap.put(element, 1);
+          }
+      }
         return frequencyMap;
     }
 

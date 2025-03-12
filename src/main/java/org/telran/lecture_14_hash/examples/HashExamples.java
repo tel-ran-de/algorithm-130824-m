@@ -68,15 +68,3 @@ public class HashExamples {
         }
     }
 }
-
-import java.util.Hashtable;
-
-Hashtable<String, String> capitals = new Hashtable<>();
-
-// Добавляем элементы
-capitals.put("Germany", "Berlin");
-capitals.put("USA", "Washington D.C.");
-
-// Получаем значение по ключу
-String capitalOfFrance = capitals.get("France");
-System.out.println("Capital of France: " + capitalOfFrance);

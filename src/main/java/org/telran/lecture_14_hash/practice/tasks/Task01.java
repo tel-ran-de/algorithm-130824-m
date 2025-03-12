@@ -10,6 +10,9 @@ public class Task01 {
     public static Map<Integer, Integer> countElementFrequency(Integer[] arr) {
         Map<Integer, Integer> frequencyMap = new HashMap<>(); // Создаем HashMap для хранения частот
         // You code here ...
+        for (int i = 0; i < arr.length; i++) {
+            frequencyMap.put(arr[i],frequencyMap.getOrDefault(arr[i],0)+1);
+        }
         return frequencyMap;
     }
 

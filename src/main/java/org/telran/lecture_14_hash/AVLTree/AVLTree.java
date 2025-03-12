@@ -365,6 +365,7 @@ public class AVLTree {
 
         System.out.println("result tree");
         tree.displayTree();
+        System.out.println(tree.root.key);
 
 //        tree.remove(50);
 //        tree.displayTree();

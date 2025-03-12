@@ -286,7 +286,7 @@ console.log("result tree");
 tree.displayTree();
 
 tree.remove(10);
-tree.remove(8);
+// tree.remove(8);
 tree.displayTree();
 
 

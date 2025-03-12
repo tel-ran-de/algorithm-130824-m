@@ -1,4 +1,4 @@
-package org.telran.lecture_14_hash.practice.tasks;
+package org.telran.lecture_14_hash.hw;
 
 // Дан массив целых чисел.
 // Найти первое вхождение элемента в массиве, который встречается ровно k раз.

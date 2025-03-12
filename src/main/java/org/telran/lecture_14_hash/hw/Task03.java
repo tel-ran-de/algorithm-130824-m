@@ -1,4 +1,4 @@
-package org.telran.lecture_14_hash.practice.tasks;
+package org.telran.lecture_14_hash.hw;
 
 import java.util.List;
 import java.util.ArrayList;

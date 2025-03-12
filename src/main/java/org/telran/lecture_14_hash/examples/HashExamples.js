@@ -58,14 +58,3 @@ console.log("-------------------------------------")
 for (const key of keys) {
     console.log(`multiplicationHash("${key}", ${tableSize}) = ${multiplicationHash(key, tableSize)}`);
 }
-
-let myObject = {};
-myObject["key1"] = "value1";
-myObject[42] = "value2";
-console.log(myObject["key1"])
-
-let myMap = new Map();
-let objKey = { id: 1 };
-myMap.set("key1", "value1");
-myMap.set(objKey, "value2");
-console.log(myMap.get(objKey));

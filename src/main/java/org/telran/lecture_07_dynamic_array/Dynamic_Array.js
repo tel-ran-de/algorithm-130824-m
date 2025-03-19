@@ -1,9 +1,8 @@
 /** Динамическич массив в реализации класса */
 
 class DynamicArray {
-    #array;
     constructor() {
-        this.#array = new Array(1); // Внутренний массив, для хранения элементов
+        this.array = new Array(1); // Внутренний массив, для хранения элементов
         this.count = 0; // Количество занятых ячеек массива
         this.size = 1;  // Физический размер массива в памяти
     }
@@ -78,5 +77,9 @@ class DynamicArray {
 // test DynamicArray
 let da = new DynamicArray();
 da.add(10);
+da.add(10);
+da.add(10);
+da.add(10);
+da.add(10);
 
-console.log(da);
+console.log(`${da}`);

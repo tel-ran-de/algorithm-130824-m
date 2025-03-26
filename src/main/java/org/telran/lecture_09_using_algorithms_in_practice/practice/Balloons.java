@@ -34,16 +34,16 @@ package org.telran.lecture_09_using_algorithms_in_practice.practice;
 
 public class Balloons {
     public static void main(String[] args) {
-        int k = 7;
-
-        if (canBuy(k)) {
-            System.out.println("Yes");
-        } else {
-            System.out.println("No");
-        }
+        System.out.println(isPossibleToBuy(7));
     }
 
-    public static boolean canBuy(int k) {
-        return k != 1 && k != 2 && k != 4 && k != 7;
+    public static boolean isPossibleToBuy(int k) {
+        for (int i = 0; i * 5 <= k; i++) {
+            int rest = k - (i * 5);
+            if (rest % 3 == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }

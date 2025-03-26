@@ -114,8 +114,11 @@ class BST {
      * @return Минимальный узел или null, если дерево пустое.
      */
     public Node min() {
-        // TODO-4: напишите реализацию метода
-        return new Node(0, "zero"); // Заглушка
+        Node node = root;
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node;
     }
 
     /**
@@ -124,8 +127,11 @@ class BST {
      * @return Максимальный узел или null, если дерево пустое.
      */
     public Node max() {
-        // TODO-5: напишите реализацию метода
-        return new Node(0, "zero"); // Заглушка
+        Node node = root;
+        while (node.right != null) {
+            node = node.right;
+        }
+        return node;
     }
 
     public int length() {

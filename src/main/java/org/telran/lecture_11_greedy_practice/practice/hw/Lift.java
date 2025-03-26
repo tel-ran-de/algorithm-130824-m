@@ -15,6 +15,51 @@ package org.telran.lecture_11_greedy_practice.practice.hw;
 //  результат: отправляем лифт С
 
 
+import java.util.NoSuchElementException;
 
 public class Lift {
+
+    private static int totalQuantity = 1;
+
+    private final int liftNumber;
+
+    private final int speed;
+
+    private final int currentFloor;
+
+    public Lift(int speed, int currentFloor) {
+        this.speed = speed;
+        this.currentFloor = currentFloor;
+        this.liftNumber = totalQuantity++;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public static Lift findFastest(Lift[] lifts, int targetFlor) {
+        if (lifts == null || lifts.length == 0) {
+            throw new NoSuchElementException();
+        }
+
+        Lift result = lifts[0];
+        for (Lift lift : lifts) {
+            if (calculateTime(lift, targetFlor) < calculateTime(result, targetFlor)) {
+                result = lift;
+            }
+        }
+        return result;
+    }
+
+    private static int calculateTime(Lift lift, int targetFloor) {
+        return Math.abs(lift.currentFloor - targetFloor) * lift.getSpeed();
+    }
+
+    @Override
+    public String toString() {
+        return "Lift " + liftNumber + "{" +
+                "speed=" + speed +
+                ", currentFloor=" + currentFloor +
+                '}';
+    }
 }

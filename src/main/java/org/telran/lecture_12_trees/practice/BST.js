@@ -22,9 +22,10 @@ class BinarySearchTree {
     /**
      * Создает новое бинарное дерево поиска.
      */
-    constructor() {
+    #length=0
+    constructor(root, length) {
         this.root = null;
-        this.num_nodes = 0;
+        this.#length=this.#length
     }
 
     /**
@@ -34,9 +35,10 @@ class BinarySearchTree {
      */
     insert(key, value) {
         const newNode = new Node(key, value);
-        // newNode = {"key": 2, "value": "Вася", "left": null, "right": null};
+
         if (this.root === null) {
             this.root = newNode;
+            this.#length++;
         } else {
             this.insertNode(this.root, newNode);
         }
@@ -48,23 +50,26 @@ class BinarySearchTree {
      * @param newNode Новый узел.
      */
     insertNode(node, newNode) {
-        // TODO-1[complete]: Доработайте код, чтобы все ключи были уникальные.
+        // TODO-1: Доработайте код, чтобы все ключи были уникальные.
         if (newNode.key < node.key) {
             if (node.left === null) {
                 node.left = newNode;
-                this.num_nodes++;
             } else {
                 this.insertNode(node.left, newNode);
+                this.#length++
             }
-        } else if (newNode.key > node.key) {
-            if (node.right === null) {
-                node.right = newNode;
-                this.num_nodes++;
+        } 
+        if (newNode.key > node.key) {
+            if (node.left === null) {
+                node.left = newNode;
             } else {
-                this.insertNode(node.right, newNode);
+                this.insertNode(node.left, newNode);
+                this.#length++
             }
-        } else { // Найдена дублирующая Нода
-            node.value = newNode.value;
+        }
+        if (newNode.key === node.key){
+            console.log(`"Ошибка, дублированный ключ ${newNode.key}"`);
+            
         }
     }
 
@@ -85,40 +90,77 @@ class BinarySearchTree {
      * @returns Найденный узел или null, если узел не найден.
      */
     searchNode(node, key) {
-        // TODO-3[complete]:напишите реализацию метода
+        // // TODO-3:  напишите реализацию метода
 
+        // Если узел найден, возвращаем его значение(value)
+        // Если не найден, продолжаем поиск в левой или правой части
         if (node === null) {
-            return null;
-        }
-
+        return null;
+      }
+  
+        if (node.key === key) {
+        return node; 
+      }
+  
         if (key < node.key) {
-            return this.searchNode(node.left, key);
-        } else if (key > node.key) {
-            return this.searchNode(node.right, key);
-        } else {
-            return node;
-        }
+        return this.searchNode(node.left, key); 
+      }
+        if (key > node.key) {
+        return this.searchNode(node.right, key);
+    }
     }
 
     /**
      * Находит минимальный узел в дереве.
      * @returns Минимальный узел или null, если дерево пустое.
+     * // TODO-4: напишите реализацию метода
      */
     min() {
-        // TODO-4: напишите реализацию метода
+        if (this.root === null) {
+            return null;
+        }
+
+        let current = this.root;
+
+        while (current.left !== null) {
+            current = current.left;
+        }
+
+        return current; 
     }
 
     /**
      * Находит максимальный узел в дереве.
      * @returns Максимальный узел или null, если дерево пустое.
+     *  // TODO-5: напишите реализацию метода
      */
     max() {
-        // TODO-5: напишите реализацию метода
+        if (this.root === null) {
+            return null;
+        }
+
+        let current = this.root;
+
+        while (current.right !== null) {
+            current = current.right;
+        }
+        return current; 
     }
 
+    // TODO-2: реализуйте метод, возвращающий количество узлов в дереве
+    // length() {
+        
+    //     const countNodes = (node) => {
+    //         if (node === null) {
+    //             return 0; 
+    //         }
+    //         return 1 + countNodes(node.left) + countNodes(node.right);
+    //     };        
+    //     return countNodes(this.root);        
+    // }
+
     length() {
-        // TODO-2[complete]: реализуйте метод, возвращающий количество узлов в дереве
-        return this.num_nodes;
+        return this.#length;
     }
 
     /**
@@ -142,8 +184,8 @@ class BinarySearchTree {
     displayNode(node, prefix, isLeft) {
         if (node !== null) {
             const displayPrefix = prefix + (isLeft ? '├── L:' : '└── R:');
-            console.log(displayPrefix + node.key + ':' + node.value);
-            // console.log(displayPrefix + node.key);
+            // console.log(displayPrefix + node.key + ':' + node.value);
+            console.log(displayPrefix + node.key);
 
             const childPrefix = prefix + (isLeft ? '│   ' : '    ');
             if (node.left || node.right) {
@@ -155,8 +197,15 @@ class BinarySearchTree {
 }
 
 // Пример использования
-const bst = new BinarySearchTree();
-bst.insert(3, "1");
+const bts = new BinarySearchTree();
+bts.insert(1, "1");
+bts.insert(3, "1");
+bts.insert(4, "1");
+bts.insert(2, "1");
+bts.insert(6, "1");
+bts.insert(8, "1");
+bts.insert(5, "1");
 
-bst.displayTree();
+bts.displayTree();
 
+console.log(bts.length());

@@ -16,5 +16,51 @@ package org.telran.lecture_11_greedy_practice.practice.hw;
 
 
 
-public class Lift {
+ public class Lift {
+    private int currentFloor;
+    private int speed; // в секундах на этаж
+
+    public Lift(int currentFloor, int speed) {
+        this.currentFloor = currentFloor;
+        this.speed = speed;
+    }
+
+    public int getCurrentFloor() {
+        return currentFloor;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int calculateTimeToFloor(int targetFloor) {
+        return Math.abs(targetFloor - currentFloor) * speed;
+    }
+
+    public static void main(String[] args) {
+        Lift liftA = new Lift(4, 3);
+        Lift liftB = new Lift(8, 2);
+        Lift liftC = new Lift(5, 2);
+
+        List<Lift> lifts = new ArrayList<>();
+        lifts.add(liftA);
+        lifts.add(liftB);
+        lifts.add(liftC);
+
+        int targetFloor = 1;
+        Lift fastestLift = null;
+        int minTime = Integer.MAX_VALUE;
+
+        for (Lift lift : lifts) {
+            int time = lift.calculateTimeToFloor(targetFloor);
+            if (time < minTime) {
+                minTime = time;
+                fastestLift = lift;
+            }
+        }
+        if (fastestLift != null) {
+            System.out.println("Отправляем лифт с этажа " + fastestLift.getCurrentFloor() + " - он доедет за " + minTime + " секунд");
+
+        }
+    }
 }
